@@ -22,5 +22,9 @@ In order to install Amenity docker base solution make sure that you have:
     * default output can remain `None`
 * run `$(aws ecr get-login --no-include-email --region us-east-1)`
   * you should see `Login Succeeded` after running this command
-* `curl -L -o docker-compose.yml https://my.url/composefile && docker-compose up`  
+* 
+```
+curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose.yml
+docker-compose up
+```    
 
