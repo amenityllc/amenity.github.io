@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  gateway:
+    image: 919287335240.dkr.ecr.us-east-1.amazonaws.com/on-pr-gatew-11y7bnijkjlz5:latest
+    ports:
+      - "9090:9090"
+    links:
+      - sa-engine
+    environment:
+      VERSION: 0.0.38
+      SA_ENGINE_HOST: sa-engine
+      SA_ENGINE_PORT: 8080
+
+  sa-engine:
+    image: 919287335240.dkr.ecr.us-east-1.amazonaws.com/on-pr-saeng-14u6p6wnbgv10:latest
+    environment:
+      - JAVA_OPTS="-Xmx16Gb"
+    ports:
+      - "8080:8080"
+
