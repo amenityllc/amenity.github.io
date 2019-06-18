@@ -1,4 +1,4 @@
-***Amenity Docker Compose setup*** 
+***Amenity Compose setup*** 
 
 In order to install Amenity docker base solution make sure that you have: 
 * machine with 16 GB ram or above
@@ -10,7 +10,6 @@ In order to install Amenity docker base solution make sure that you have:
 * Docker-compose 3.7 or above (https://docs.docker.com/compose/install/)
 * pip3 installed(https://pip.pypa.io/en/stable/)
 * aws cli tool installed(`pip3 install awscli --upgrade --user`)
-   
 ***
 
 
