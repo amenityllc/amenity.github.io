@@ -27,3 +27,9 @@ curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/re
 docker-compose up
 ```    
 
+##### Testing 
+```
+curl -L -O 1001.xmk https://github.com/amenityllc/amenity.github.io/releases/download/1.0/1001.xml
+curl -X POST -H 'Accept:{"input":"mxml","output":"json"}' -d @1001.xml http://localhost:9090/api/v1/articles/analyzeText --verbose
+```
+
