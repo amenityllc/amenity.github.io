@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  gateway:
+    image: 919287335240.dkr.ecr.us-east-1.amazonaws.com/on-pr-gatew-11y7bnijkjlz5:latest
+    volumes:
+      - ./certs/:/certs
+    ports:
+      - "9443:9443"
+    links:
+      - sa-engine
+    environment:
+      SA_ENGINE_HOST: sa-engine
+      SA_ENGINE_PORT: 8080
+      GUNICORN_CMD_ARGS: "--bind=0.0.0.0:9443 --certfile=/certs/localhost.pem --keyfile=/certs/localhost-key.pem"
+  sa-engine:
+    image: 919287335240.dkr.ecr.us-east-1.amazonaws.com/on-pr-saeng-14u6p6wnbgv10:latest
+    environment:
+      - JAVA_OPTS="-Xmx16Gb"
+    ports:
+      - "8080"

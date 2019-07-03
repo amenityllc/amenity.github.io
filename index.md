@@ -22,14 +22,31 @@ In order to install Amenity docker base solution make sure that you have:
 * run `$(aws ecr get-login --no-include-email --region us-east-1)`
   * you should see `Login Succeeded` after running this command
 * 
+
+***
+*HTTP:*
+--
 ```
 curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose.yml
 docker-compose up
 ```    
-
-##### Testing 
+testing: 
 ```
 curl -L -o 1001.xml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/1001.xml
 curl -X POST -H 'Accept:{"input":"mxml","output":"json"}' -d @1001.xml http://localhost:9090/api/v1/articles/analyzeText --verbose
+```
+***
+*HTTPS:*
+--
+ to serve the endpoint with SSL you should have the certificate and the key in `certs` folder. checkout `volume` section in the `docker-compose.yml` file. 
+ the certificate and the key are passing via `GUNICORN_CMD_ARGS` envionment variable to the container.
+```
+curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose-ssl.yml
+docker-compose up
+``` 
+##### Testing 
+```
+curl -L -o 1001.xml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/1001.xml
+curl -X POST -H 'Accept:{"input":"mxml","output":"json"}' -d @1001.xml https://localhost:9443/api/v1/articles/analyzeText --verbose
 ```
 
