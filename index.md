@@ -11,13 +11,13 @@ In order to install Amenity on prem base solution make sure that you have:
 * pip3 installed(https://pip.pypa.io/en/stable/)
 * aws cli tool installed(`pip3 install awscli --upgrade --user`)
 * sudo usermod -a -G docker ec2-user(or any other ssh user)
-***
 
-## verify docker is setup corrently 
+
+##### verify docker is setup corrently 
 * login with non root user and run the next command  `docker run hello-world` 
 see if it returns without errors
 
-##### Setup
+## Setup
 
 * run `aws configure`
     * provide the access key and the secret 
