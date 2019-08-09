@@ -1,17 +1,21 @@
-***Amenity Compose setup*** 
+***Amenity On Prem setup*** 
 
-In order to install Amenity docker base solution make sure that you have: 
+In order to install Amenity on prem base solution make sure that you have: 
 * machine with 16 GB ram or above
 * you have access key + secret key provided by Amenity  
-
+* sudo access
 
 *Software prerequisite:*
 * Docker 18 or above (https://download.docker.com/)
 * Docker-compose 3.7 or above (https://docs.docker.com/compose/install/)
 * pip3 installed(https://pip.pypa.io/en/stable/)
 * aws cli tool installed(`pip3 install awscli --upgrade --user`)
+* sudo usermod -a -G docker ec2-user(or any other ssh user)
 ***
 
+## verify docker is setup corrently 
+* login with non root user and run the next command  `docker run hello-world` 
+see if it returns without errors
 
 ##### Setup
 
