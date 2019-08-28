@@ -1,26 +1,27 @@
 ***Amenity On Prem setup*** 
 
-In order to install Amenity on prem base solution make sure that you have: 
-* machine with 16 GB ram or above
-* you have access key + secret key provided by Amenity  
-* sudo access
+In order to install the Amenity on prem base solution, make sure that you have: 
+* a machine with 16 GB RAM or more
+* you have an access key and secret key provided by Amenity  
+* sudo access to your machine
 
 *Software prerequisite:*
 * Docker 18 or above (https://download.docker.com/)
 * Docker-compose 3.7 or above (https://docs.docker.com/compose/install/)
-* pip3 installed(https://pip.pypa.io/en/stable/)
-* aws cli tool installed(`pip3 install awscli --upgrade --user`)
-* sudo usermod -a -G docker ec2-user(or any other ssh user)
+* pip3 installed (https://pip.pypa.io/en/stable/)
+* aws cli tool installed (https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+* user added to the docker group (sudo usermod -a -G docker $USER)
 
 
-##### verify docker is setup corrently 
+##### Verify docker is setup correctly 
 * login with non root user and run the next command  `docker run hello-world` 
 see if it returns without errors
 
 ## Setup
 
 * run `aws configure`
-    * provide the access key and the secret 
+    * provide the access key
+    * provide the secret key 
     * set region as `us-east-1`
     * default output can remain `None`
 * run `$(aws ecr get-login --no-include-email --region us-east-1)`
@@ -37,15 +38,24 @@ docker-compose up
 ***
 *HTTPS:*
 --
- to serve the endpoint with SSL you should have the certificate and the key in `certs` folder. checkout `volume` section in the `docker-compose.yml` file. 
- the certificate and the key are passing via `GUNICORN_CMD_ARGS` envionment variable to the container.
+ To serve the endpoint with SSL you must place your certificate and key in the `certs` folder. Checkout the `volume` section in the `docker-compose.yml` file. 
+ The certificate and key are passed to the container via `GUNICORN_CMD_ARGS` envionment variable.
 ```
 curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose-ssl.yml
 docker-compose up
 ``` 
 ##### Testing 
+*HTTP:*
+--
+```
+curl -L -o 1001.xml https://github.com/amenityllc/a,emotu/github.io/releases/download/1.0/1001.xml
+curl -X POST -d @1001.xml http://localhost:9090/api/v1/articles/000/000/analyzeText --verbose
+```
+***
+*HTTPS:*
+--
 ```
 curl -L -o 1001.xml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/1001.xml
-curl -X POST -H 'Accept:{"input":"mxml","output":"json"}' -d @1001.xml https://localhost:9443/api/v1/articles/analyzeText --verbose
+curl -X POST -d @1001.xml https://localhost:9443/api/v1/articles/000/000/analyzeText --verbose
 ```
 
