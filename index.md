@@ -44,6 +44,20 @@ docker-compose up
 curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose-ssl.yml
 docker-compose up
 ``` 
+---
+# Custom Model update #
+In order to preload a custom model to the container, you'll have to put the model bundle zip in a folder and mount it to the container. a ststup script will installed the model zip inside the container. 
+
+in case there is multiple zip files in the mount folder we will peek only the first one (alphabetic order). 
+
+if the folder is not exist or not containing any zip file, the startup scrit will continue to startup the server.   
+
+in order to load the custom model: 
+```
+docker run -d -e JAVA_OPTS="-Xmx16Gb" -p 8080:8080  -v /local/path/to/models/directoy:/data/models  919287335240.dkr.ecr.us-east-1.amazonaws.com/on-pr-saeng-14u6p6wnbgv10:latest
+```
+   
+
 ##### Testing 
 *HTTP:*
 --
