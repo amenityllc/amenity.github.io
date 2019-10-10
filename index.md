@@ -63,13 +63,11 @@ docker run -d -e JAVA_OPTS="-Xmx16Gb" -p 8080:8080  -v /local/path/to/models/dir
 *HTTP:*
 --
 ```
-curl -L -o 1001.xml https://github.com/amenityllc/a,emotu/github.io/releases/download/1.0/1001.xml
-curl -X POST -d @1001.xml http://localhost:9090/api/v1/articles/000/000/analyzeText --verbose
+curl -X GET http://localhost:9090/version --verbose
 ```
 ***
 *HTTPS:*
 --
 ```
-curl -L -o 1001.xml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/1001.xml
-curl -X POST -d @1001.xml https://localhost:9443/api/v1/articles/000/000/analyzeText --verbose
+curl -X GET https://localhost:9090/version --verbose
 ```
