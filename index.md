@@ -98,7 +98,7 @@ The following end points are the different ways in which one can interact with t
     ```
   * `/api/v1/articles/${DOCUMENT_ID}/analyzeText` calls a specific set of pre- and post-processing functions designed for a specific use-case.
     ```bash
-    curl -X POST -H "Content-type: ${INPUT_MIME_TYPE}" -H "Accept: ${OUTPUT_MIME_TYPE} --data-binary path/to/input/file.ext http://localhost:9090/api/v1/articles/${DOCUMENT_ID}/analyzeText
+    curl -X POST -H "Content-type: ${INPUT_MIME_TYPE}" -H "Accept: ${OUTPUT_MIME_TYPE} --data-binary @path/to/input/file.ext http://localhost:9090/api/v1/articles/${DOCUMENT_ID}/analyzeText
     ```
     * `${INPUT_MIME_TYPE}` and `${OUTPUT_MIME_TYPE}` are pre-defined (e.g., `application/xml`)
     * `${DOCUMENT_ID}` will be provided by Amenity
