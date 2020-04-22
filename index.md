@@ -16,7 +16,7 @@ In order to successfully install the Amenity on-prem base solution, ensure that 
 * [Docker 18+](https://docs.docker.com/install)
 * [`docker-compose` 1.25.1-rc1+](https://github.com/docker/compose/releases) (format 3.7+)
 * [`pip3`](https://pip.pypa.io/en/stable/installing)
-* [AWS Command Line Interace (CLI)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+* [AWS Command Line Interface (CLI)](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
 * User added to the docker group
   ```bash
   sudo usermod -aG docker $USER
@@ -67,9 +67,9 @@ The output should resemble the following format:
 
 ### Custom Model Update
 
-By default, the engine ships with Amenity's base image. This step is only neccessary if Amenity provided a separate model bundle file.
+By default, the engine ships with Amenity's base image. This step is only necessary if Amenity provided a separate model bundle file.
 
-Adding a model or updating one built-in can be done without redownloading the engine or gateway. Simply place a model bundle (`zip`) in an empty folder and mount the folder to the docker container.
+Adding a model or updating one built-in can be done without re-downloading the engine or gateway. Simply place a model bundle (`zip`) in an empty folder and mount the folder to the docker container.
 
 For example,
 ```
@@ -92,7 +92,7 @@ The following end points are the different ways in which one can interact with t
     curl -X GET http://localhost:9090/api/v1/articles/analyzeText
     ```
 * _POST_
-  * `/api/v1/articles/analyzeText` tests whether or not the gateway properly receives data and runs a test call to the engine. This endpoint returns wether or not the tests succeeded or a possible cause of failure.
+  * `/api/v1/articles/analyzeText` tests whether or not the gateway properly receives data and runs a test call to the engine. This endpoint returns whether or not the tests succeeded or a possible cause of failure.
     ```bash
     curl -X POST -d "this can contain any text" http://localhost:9090/api/v1/articles/analyzeText
     ```
