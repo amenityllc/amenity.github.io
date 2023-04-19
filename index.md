@@ -41,7 +41,7 @@ The installation steps outlined in Setup below assumes the following software is
     ```
   * _HTTPS_
     ```bash
-    curl -L -o .env https://github.com/amenityllc/amenity.github.io/releases/download/1.2/.env
+    curl -L -o .env https://github.com/amenityllc/amenity.github.io/releases/download/1.2/env
     curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.2/docker-compose-ssl.yml
     ```
     **NOTE**: Amenity does not provide SSL certificates. If you are using an SSL certificate you must do the following:
