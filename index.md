@@ -34,16 +34,23 @@ The installation steps outlined in Setup below assumes the following software is
   * The default output can remain `None`
 * Run `$(aws ecr get-login --no-include-email --region us-east-1)`
   * The output should end with `Login Succeeded`
-* Use one of the following commands to download a `docker-compose.yml` file depending on whether or not you need a security layer.
+* Use one of the following commands to download a `docker-compose.yml` file depending on whether or not you are using an SSL certificate.
   * _HTTP_
     ```bash
-    curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose.yml
+    curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.2/docker-compose.yml
     ```
   * _HTTPS_
     ```bash
-    curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.0/docker-compose-ssl.yml
+    curl -L -o .env https://github.com/amenityllc/amenity.github.io/releases/download/1.2/.env
+    curl -L -o docker-compose.yml https://github.com/amenityllc/amenity.github.io/releases/download/1.2/docker-compose-ssl.yml
     ```
-    **NOTE**: Amenity does not provide security credentials. You must place your certificate and key files in the `/cert` folder.
+    **NOTE**: Amenity does not provide SSL certificates. If you are using an SSL certificate you must do the following:
+    * Create a directory called `certs` in the directory where your docker-compose.yml file is located.
+    * Open the `.env` file you downloaded using the second curl command above and update it with the names of your SSL certificate and key files. For example, if your files are `my_cert.pem` and `my_cert_key.pem`, the file will look like this:
+    ```
+    CERT_FILE=my_cert.pem
+    KEY_FILE=my_cert_key.pem
+    ```
 * Run `docker-compose up` to download and run the engine and gateway.
 
 ---
@@ -55,6 +62,13 @@ To test your installation is properly running, run the following command:
   ```bash
   curl -X GET http://localhost:9090/api/v1/articles/analyzeText
   ```
+
+Or if you are using SSL
+* _HTTP_
+  ```bash
+  curl -X -k GET https://localhost/api/v1/articles/analyzeText
+  ```
+
 
 The output should resemble the following format:
 ```bash
