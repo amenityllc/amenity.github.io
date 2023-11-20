@@ -1,0 +1,63 @@
+version: '3'
+services:
+  kevin:
+    image: 212763104880.dkr.ecr.us-east-1.amazonaws.com/kevin-onprem
+    volumes:
+      - $WORKSHOP_WORKSPACE_DIRECTORY:/mnt
+  nerd:
+    image: 212763104880.dkr.ecr.us-east-1.amazonaws.com/nerd-onprem
+    volumes:
+      - $WORKSHOP_WORKSPACE_DIRECTORY:/mnt
+  insightengine:
+    image: 212763104880.dkr.ecr.us-east-1.amazonaws.com/insightengine-onprem
+    volumes:
+      - $WORKSHOP_WORKSPACE_DIRECTORY:/mnt
+  elder-scrolls:
+    image: 212763104880.dkr.ecr.us-east-1.amazonaws.com/elder-scrolls-onprem
+    volumes:
+      - $WORKSHOP_WORKSPACE_DIRECTORY:/mnt
+  zubin:
+    image: 212763104880.dkr.ecr.us-east-1.amazonaws.com/zubin-onprem
+    volumes:
+      - $WORKSHOP_WORKSPACE_DIRECTORY:/mnt
+    environment:
+      NLP_PARSE_PORT: 80
+      NLP_PARSE_HOST_IP: kevin
+      GROUPS_PORT: 80
+      GROUPS_HOST_IP: nerd
+      PATTERNS_PORT: 80
+      PATTERNS_HOST_IP: insightengine
+      BL_PORT: 80
+      BL_HOST_IP: elder-scrolls
+      WORKSHOP_WORKSPACE_DIRECTORY: /mnt
+    depends_on:
+      - kevin
+      - nerd
+      - insightengine
+      - elder-scrolls
+  gatewayv2:
+    image: 212763104880.dkr.ecr.us-east-1.amazonaws.com/gatewayv2-onprem
+    environment:
+      WORKSHOP_PORT: 80
+      WORKSHOP_HOST: zubin
+      GUNICORN_CMD_ARGS: "--bind=0.0.0.0:443 --certfile=/certs/${CERT_NAME} --keyfile=/certs/${KEY_NAME}"
+      CORS_ORIGIN: "${CORS_ORIGIN}"
+    links:
+      - zubin
+    depends_on:
+      - zubin
+      - kevin
+      - nerd
+      - insightengine
+      - elder-scrolls
+    volumes:
+      - "${CERT_LOCATION}:/certs"
+    ports:
+      - "443:443"
+volumes:
+  shared:
+    driver: local
+    driver_opts:
+      type: none
+      device: $WORKSHOP_WORKSPACE_DIRECTORY
+      o: bind
