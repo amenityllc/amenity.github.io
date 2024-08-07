@@ -17,4 +17,6 @@ services:
       - JAVA_OPTS="-Xmx16Gb"
     ports:
       - "8080:8080"
+    volumes: 
+      - /path_to_model_directory:/data/models/
 
